@@ -2,6 +2,7 @@ conta=0
 contr=0
 acumprom=0
 promedios=[]
+estudiantes={}
 
 def menu():
     print("\n=====MENU DE OPCIONES=====")
@@ -16,7 +17,7 @@ def registrar(est,califs):
     if prom>=80 and prom<=100:
         sit="Aprobado"
         conta=conta+1
-    elif prom>=70 and prom <=79:
+    elif prom>=70 and prom <80:
         sit="Riesgo de reprobación. Pero estas aprobado"
         conta=conta+1
     else:
@@ -26,8 +27,8 @@ def registrar(est,califs):
     acumprom+=prom
 
     with open("estudiantes.txt","a") as archivo: 
-        archivo.write(f"Número de identificación del alumno: {est.keys()}\nNombre del alumno: {est.values()}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
-
+        archivo.write(f"Número de identificación del alumno: {list(est.keys())[-1]}\nNombre del alumno: {list(est.values())[0]}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
+    return conta,contr,acumprom
 def mostrar():
     with open("estudiantes.txt","r") as archivo:
         for linea in archivo:
@@ -59,7 +60,7 @@ while True:
     if opcion==1:
         numid=int(input("Ingrese el número de identificación del estudiante: "))
         nombre=str(input("Ingrese el nombre del estudiante: "))
-        estudiantes={numid:nombre}
+        estudiantes[numid]=nombre
         condicion1=False
         while condicion1==False:
             c=int(input("Ingrese la primera calificación del alumno: "))
@@ -91,7 +92,7 @@ while True:
                 print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
 
         calificaciones=(c1,c2,c3)
-        registrar(estudiantes,calificaciones)
+        conta,contr,acumprom=registrar(estudiantes,calificaciones,conta,contr,acumprom)
     elif opcion==2:
         mostrar()
     elif opcion==3:
