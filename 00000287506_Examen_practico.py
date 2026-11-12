@@ -2,6 +2,7 @@ conta=0
 contr=0
 acumprom=0
 promedios=[]
+
 def menu():
     print("\n=====MENU DE OPCIONES=====")
     print("1. Registrar un estudiante")
@@ -14,13 +15,13 @@ def registrar(est,califs):
     prom=sum(califs)/3
     if prom>=80 and prom<=100:
         sit="Aprobado"
-        conta+=1
+        conta=conta+1
     elif prom>=70 and prom <=79:
         sit="Riesgo de reprobación. Pero estas aprobado"
-        conta+=1
+        conta=conta+1
     else:
         sit="Reprobado"
-        contr+=1
+        contr=contr+1
     promedios.append(prom)
     acumprom+=prom
 
@@ -53,13 +54,11 @@ print("A continuación se mostrará el menú de las opciones que puede hacer en 
 print("En caso de que la opción no sea válida, se volverá a mostrar el menú hasta que la opción sea válida")
 
 while True:
-    estud=[]
     menu()
     opcion=int(input("¿Qué acción desea realizar? "))
     if opcion==1:
         numid=int(input("Ingrese el número de identificación del estudiante: "))
         nombre=str(input("Ingrese el nombre del estudiante: "))
-        estud.append(numid)
         estudiantes={numid:nombre}
         condicion1=False
         while condicion1==False:
