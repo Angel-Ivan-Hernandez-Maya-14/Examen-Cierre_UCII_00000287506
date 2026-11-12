@@ -12,7 +12,7 @@ def menu():
     print("4. Mostrar estadísticas generales del grupo")
     print("5. Salir del programa")
 
-def registrar(est,califs):
+def registrar(est,califs,conta,contr,acumprom):
     prom=sum(califs)/3
     if prom>=80 and prom<=100:
         sit="Aprobado"
