@@ -1,0 +1,19 @@
+Número de identificación del alumno: 287506
+Nombre del alumno: Ivan
+Primera calificación: 100
+Segunda calificación: 100
+Tercera calificación: 100
+Promedio: 100.0
+Situación: AprobadoNúmero de identificación del alumno: 288688
+Nombre del alumno: Cesar
+Primera calificación: 70
+Segunda calificación: 80
+Tercera calificación: 85
+Promedio: 78.33333333333333
+Situación: Riesgo de reprobación. Pero estas aprobadoNúmero de identificación del alumno: 287065
+Nombre del alumno: Jose
+Primera calificación: 100
+Segunda calificación: 95
+Tercera calificación: 92
+Promedio: 95.66666666666667
+Situación: Aprobado

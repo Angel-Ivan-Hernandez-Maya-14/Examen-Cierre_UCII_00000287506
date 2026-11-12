@@ -27,7 +27,7 @@ def registrar(est,califs,conta,contr,acumprom):
     acumprom+=prom
 
     with open("estudiantes.txt","a") as archivo: 
-        archivo.write(f"Número de identificación del alumno: {list(est.keys())[-1]}\nNombre del alumno: {list(est.values())[0]}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
+        archivo.write(f"Número de identificación del alumno: {list(est.keys())[-1]}\nNombre del alumno: {list(est.values())[-1]}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
     return conta,contr,acumprom
 def mostrar():
     with open("estudiantes.txt","r") as archivo:
@@ -39,10 +39,13 @@ def consultar():
 
 def estadisticas(dictestu):
     esreg=len(dictestu)
-    promg=sum(promedios)/esreg
+    if esreg>0:
+        promg=sum(promedios)/esreg
+    else:
+        promg=0
     alto=max(promedios)
     with open("estadisticas.txt","w") as archivo:
-        archivo.write(f"Estudiantes registrados: {esreg}\nPromedio general: {promg}\nAprobados: {conta}\nReprobados: {contr}Promedio mas alto: {alto}")
+        archivo.write(f"Estudiantes registrados: {esreg}\nPromedio general: {promg}\nAprobados: {conta}\nReprobados: {contr}\nPromedio mas alto: {alto}")
 
     with open("estadisticas.txt","r") as archivo:
         for linea in archivo:
