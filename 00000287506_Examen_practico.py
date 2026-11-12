@@ -18,6 +18,15 @@ def registrar(est,califs):
     with open("estudiantes.txt","a") as archivo: 
         archivo.write(f"Número de identificación del alumno: {est.keys()}\nNombre del alumno: {est.values()}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
 
+def mostrar():
+    print()
+
+def consultar():
+    print()
+
+def estadisticas():
+    print()
+
 print("\n=====SISTEMA DE REGISTRO Y ANÁLISIS DE ESTUDIANTES=====")
 print("Sea bienvenido :)")
 print("A continuación se mostrará el menú de las opciones que puede hacer en el sistema")
@@ -63,11 +72,11 @@ while True:
         calificaciones=(c1,c2,c3)
         registrar(estudiantes,calificaciones)
     elif opcion==2:
-        print()
+        mostrar()
     elif opcion==3:
-        print()
+        consultar()
     elif opcion==4:
-        print()
+        estadisticas()
     elif opcion==5:
         print("Saliendo del sistema...")
         break
