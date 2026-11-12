@@ -1,3 +1,7 @@
+conta=0
+contr=0
+acumprom=0
+promedios=[]
 def menu():
     print("\n=====MENU DE OPCIONES=====")
     print("1. Registrar un estudiante")
@@ -10,22 +14,38 @@ def registrar(est,califs):
     prom=sum(califs)/3
     if prom>=80 and prom<=100:
         sit="Aprobado"
+        conta+=1
     elif prom>=70 and prom <=79:
         sit="Riesgo de reprobación. Pero estas aprobado"
+        conta+=1
     else:
         sit="Reprobado"
+        contr+=1
+    promedios.append(prom)
+    acumprom+=prom
 
     with open("estudiantes.txt","a") as archivo: 
         archivo.write(f"Número de identificación del alumno: {est.keys()}\nNombre del alumno: {est.values()}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
 
 def mostrar():
-    print()
+    with open("estudiantes.txt","r") as archivo:
+        for linea in archivo:
+            print(linea.strip())
 
 def consultar():
     print()
 
-def estadisticas():
-    print()
+def estadisticas(dictestu):
+    esreg=len(dictestu)
+    promg=sum(promedios)/esreg
+    alto=max(promedios)
+    with open("estadisticas.txt","w") as archivo:
+        archivo.write(f"Estudiantes registrados: {esreg}\nPromedio general: {promg}\nAprobados: {conta}\nReprobados: {contr}Promedio mas alto: {alto}")
+
+    with open("estadisticas.txt","r") as archivo:
+        for linea in archivo:
+            print(linea.strip())
+    
 
 print("\n=====SISTEMA DE REGISTRO Y ANÁLISIS DE ESTUDIANTES=====")
 print("Sea bienvenido :)")
@@ -33,11 +53,13 @@ print("A continuación se mostrará el menú de las opciones que puede hacer en 
 print("En caso de que la opción no sea válida, se volverá a mostrar el menú hasta que la opción sea válida")
 
 while True:
+    estud=[]
     menu()
     opcion=int(input("¿Qué acción desea realizar? "))
     if opcion==1:
         numid=int(input("Ingrese el número de identificación del estudiante: "))
         nombre=str(input("Ingrese el nombre del estudiante: "))
+        estud.append(numid)
         estudiantes={numid:nombre}
         condicion1=False
         while condicion1==False:
@@ -76,7 +98,7 @@ while True:
     elif opcion==3:
         consultar()
     elif opcion==4:
-        estadisticas()
+        estadisticas(estudiantes)
     elif opcion==5:
         print("Saliendo del sistema...")
         break
