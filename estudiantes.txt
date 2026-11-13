@@ -1,0 +1,8 @@
+Número de identificación del estudiante: 287506
+Nombre del estudiante: Ivan
+Primera calificación: 100
+Segunda calificación: 100
+Tercera calificación: 100
+Promedio: 100.0
+Situación: Aprobado
+================================================

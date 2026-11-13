@@ -6,12 +6,12 @@ promedios=[]
 estudiantes={}
 
 def menu():
-    print("\n=====MENU DE OPCIONES=====")
+    print("\n================MENU DE OPCIONES===============\n")
     print("1. Registrar un estudiante")
     print("2. Mostrar todos los estudiantes registrados")
     print("3. Consultar el promedio de un estudiante")
     print("4. Mostrar estadísticas generales del grupo")
-    print("5. Salir del programa")
+    print("5. Salir del programa\n")
 
 def registrar(est,califs,conta,contr,riesgorep,acumprom):
     prom=sum(califs)/3
@@ -19,7 +19,7 @@ def registrar(est,califs,conta,contr,riesgorep,acumprom):
         sit="Aprobado"
         conta+=1
     elif prom>=70 and prom <80:
-        sit="Riesgo de reprobación. Pero estas aprobado"
+        sit="Riesgo de reprobación. Pero está aprobado"
         conta+=1
         riesgorep+=1
     else:
@@ -29,15 +29,14 @@ def registrar(est,califs,conta,contr,riesgorep,acumprom):
     acumprom+=prom
 
     with open("estudiantes.txt","a") as archivo: 
-        archivo.write(f"Número de identificación del estudiante: {list(est.keys())[-1]}\nNombre del alumno: {list(est.values())[-1]}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
+        archivo.write(f"Número de identificación del estudiante: {list(est.keys())[-1]}\nNombre del estudiante: {list(est.values())[-1]}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}\n================================================\n")
     return conta,contr,riesgorep,acumprom
 
 def mostrar():
-    print("\n=====LISTA DE ESTUDIANTES REGISTRADOS=====\n")
+    print("\n========LISTA DE ESTUDIANTES REGISTRADOS========\n")
     with open("estudiantes.txt","r") as archivo:
         for linea in archivo:
             print(linea.strip())
-    print("==========================================")
 
 def consultar():
     condicionb=False
@@ -49,17 +48,18 @@ def consultar():
             condicionb=True
     encontrado=False
     try:
+        print()
         with open("estudiantes.txt","r") as archivo:
             for linea in archivo:
                 if linea.strip()==f"Número de identificación del estudiante: {buscador.strip()}":
                     encontrado=True
                 elif encontrado==True:
-                    if "Nombre del alumno:" in linea or "Promedio:" in linea or "Situación:" in linea:
+                    if "Nombre del estudiante:" in linea or "Promedio:" in linea or "Situación:" in linea:
                         print(linea.strip())
                     if "Situación:" in linea:
                         break
         if encontrado==False:
-            print("No se encontró ningún estudiante con ese número de idenificación :()")
+            print("No se encontró ningún estudiante con ese número de idenificación :(")
     except FileNotFoundError:
         print("No hay estudiantes registrados.")
         print("Necesitas registrar al menos un estudiante.")
@@ -71,10 +71,12 @@ def estadisticas(dictestu):
         alto=max(promedios)
         with open("estadisticas.txt","w") as archivo:
                 archivo.write(f"Estudiantes registrados: {esreg}\nPromedio general: {promg}\nAprobados: {conta}\nEn riesgo de reprobación: {riesgorep}\nReprobados: {contr}\nPromedio mas alto: {alto}")
-        
+
+        print("\n=====ESTADISTICAS DEL GRUPO=====")
         with open("estadisticas.txt","r") as archivo:
             for linea in archivo:
                 print(linea.strip())
+        print("================================")
     else:
         print("Todavía no hay estudiantes registrados.")    
 
@@ -89,7 +91,7 @@ while True:
     if opcion==1:
         condicionid=False
         while condicionid==False:
-            numid=str(input("Ingrese el número de identificación del estudiante: "))
+            numid=str(input("\nIngrese el número de identificación del estudiante: "))
             if numid.strip()=="":
                 print("\nEl número de identificación no debe de estar vacío. Intentelo de nuevo.")
             else:
@@ -102,16 +104,16 @@ while True:
         while condicionnom==False:
             nombre=str(input("Ingrese el nombre del estudiante: "))
             if nombre.strip()=="":
-                print("\nEl nombre no puede quedar vacío. Intentelo de nuevo.")
+                print("\nEl nombre no debe quedar vacío. Intentelo de nuevo.")
             else:
                 condicionnom=True
         
         
         condicion1=False
         while condicion1==False:
-            c=str(input("Ingrese la primera calificación del alumno: "))
+            c=str(input("\nIngrese la primera calificación del alumno: "))
             if c.strip()=="":
-                print("La primera calificación no debe de estar vacía. Intentelo de nuevo.")
+                print("La primera calificación no debe de quedar vacía. Intentelo de nuevo.")
             else:
                 c=int(c)
                 if c>=0 and c<=100:
@@ -145,7 +147,7 @@ while True:
                 if c>=0 and c<=100:
                     c3=c
                     condicion3=True
-                    print("\nCalificación agregada con éxito :)\n")
+                    print("\nCalificación agregada con éxito :)")
                 else:
                     print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
         calificaciones=(c1,c2,c3)            
