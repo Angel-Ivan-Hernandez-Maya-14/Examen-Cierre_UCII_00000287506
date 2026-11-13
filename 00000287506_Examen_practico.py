@@ -38,7 +38,7 @@ def mostrar():
             print(linea.strip())
 
 def consultar():
-    condicionb=False:
+    condicionb=False
     while condicionb==False:
         buscador=input("Ingrese el número de identificación del estudiante que desea consultar: ")
         if buscador.strip()=="":
@@ -61,21 +61,20 @@ def consultar():
     except FileNotFoundError:
         print("No hay estudiantes registrados.")
         print("Necesitas registrar al menos un estudiante.")
-        
+
 def estadisticas(dictestu):
     esreg=len(dictestu)
     if esreg>0:
         promg=sum(promedios)/esreg
+        alto=max(promedios)
+        with open("estadisticas.txt","w") as archivo:
+                archivo.write(f"Estudiantes registrados: {esreg}\nPromedio general: {promg}\nAprobados: {conta}\nEn riesgo de reprobación: {riesgorep}\nReprobados: {contr}\nPromedio mas alto: {alto}")
+        
+        with open("estadisticas.txt","r") as archivo:
+            for linea in archivo:
+                print(linea.strip())
     else:
-        promg=0
-    alto=max(promedios)
-    with open("estadisticas.txt","w") as archivo:
-        archivo.write(f"Estudiantes registrados: {esreg}\nPromedio general: {promg}\nAprobados: {conta}\nEn riesgo de reprobación: {riesgorep}\nReprobados: {contr}\nPromedio mas alto: {alto}")
-
-    with open("estadisticas.txt","r") as archivo:
-        for linea in archivo:
-            print(linea.strip())
-    
+        print("Todavía no hay estudiantes registrados.")    
 
 print("\n=====SISTEMA DE REGISTRO Y ANÁLISIS DE ESTUDIANTES=====")
 print("Sea bienvenido :)")
