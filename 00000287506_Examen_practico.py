@@ -126,7 +126,7 @@ while True:
         while condicionnom==False:
             nombre=str(input("Ingrese el nombre del estudiante: "))
             if nombre.strip()=="":
-                print("\nEl nombre no debe quedar vacío. Intentelo de nuevo.")
+                print("\nEl nombre no debe quedar vacío. Intentelo de nuevo.\n")
             else:
                 condicionnom=True
         
@@ -143,7 +143,7 @@ while True:
                     condicion1=True
                     print("\nCalificación agregada con éxito :)\n")
                 else:
-                    print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
+                    print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.")
 
         condicion2=False
         while condicion2==False:
