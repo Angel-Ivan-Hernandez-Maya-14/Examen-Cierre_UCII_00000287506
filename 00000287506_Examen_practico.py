@@ -29,7 +29,7 @@ def registrar(est,califs,conta,contr,riesgorep,acumprom):
     acumprom+=prom
 
     with open("estudiantes.txt","a") as archivo: 
-        archivo.write(f"Número de identificación del alumno: {list(est.keys())[-1]}\nNombre del alumno: {list(est.values())[-1]}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
+        archivo.write(f"Número de identificación del estudiante: {list(est.keys())[-1]}\nNombre del alumno: {list(est.values())[-1]}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
     return conta,contr,riesgorep,acumprom
 
 def mostrar():
@@ -38,8 +38,30 @@ def mostrar():
             print(linea.strip())
 
 def consultar():
-    print()
-
+    condicionb=False:
+    while condicionb==False:
+        buscador=input("Ingrese el número de identificación del estudiante que desea consultar: ")
+        if buscador.strip()=="":
+            print("\nError: No debe de estar vacío. Intentelo de nuevo. ")
+        else:
+            condicionb=True
+    encontrado=False
+    try:
+        with open("estudiantes.txt","r") as archivo:
+            for linea in archivo:
+                if linea.strip()==f"Número de identificación del estudiante: {buscador.strip()}":
+                    encontrado=True
+                elif encontrado==True:
+                    if "Nombre del alumno:" in linea or "Promedio:" in linea or "Situación:" in linea:
+                        print(linea.strip())
+                    if "Situación:" in linea:
+                        break
+        if encontrado==False:
+            print("No se encontró ningún estudiante con ese número de idenificación :()")
+    except FileNotFoundError:
+        print("No hay estudiantes registrados.")
+        print("Necesitas registrar al menos un estudiante.")
+        
 def estadisticas(dictestu):
     esreg=len(dictestu)
     if esreg>0:
