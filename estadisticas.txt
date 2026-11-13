@@ -1,5 +1,0 @@
-Estudiantes registrados: 1
-Promedio general: 95.66666666666667
-Aprobados: 1
-Reprobados: 0
-Promedio mas alto: 95.66666666666667

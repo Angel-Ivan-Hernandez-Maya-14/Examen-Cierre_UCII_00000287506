@@ -33,9 +33,11 @@ def registrar(est,califs,conta,contr,riesgorep,acumprom):
     return conta,contr,riesgorep,acumprom
 
 def mostrar():
+    print("\n=====LISTA DE ESTUDIANTES REGISTRADOS=====\n")
     with open("estudiantes.txt","r") as archivo:
         for linea in archivo:
             print(linea.strip())
+    print("==========================================")
 
 def consultar():
     condicionb=False
@@ -85,40 +87,69 @@ while True:
     menu()
     opcion=int(input("¿Qué acción desea realizar? "))
     if opcion==1:
-        numid=int(input("Ingrese el número de identificación del estudiante: "))
-        nombre=str(input("Ingrese el nombre del estudiante: "))
-        estudiantes[numid]=nombre
+        condicionid=False
+        while condicionid==False:
+            numid=str(input("Ingrese el número de identificación del estudiante: "))
+            if numid.strip()=="":
+                print("\nEl número de identificación no debe de estar vacío. Intentelo de nuevo.")
+            else:
+                numid=int(numid)
+                if numid in estudiantes:
+                    print("\nYa está registrado ese número de identificación. Intentelo de nuevo.")
+                else:
+                    condicionid=True
+        condicionnom=False
+        while condicionnom==False:
+            nombre=str(input("Ingrese el nombre del estudiante: "))
+            if nombre.strip()=="":
+                print("\nEl nombre no puede quedar vacío. Intentelo de nuevo.")
+            else:
+                condicionnom=True
+        
+        
         condicion1=False
         while condicion1==False:
-            c=int(input("Ingrese la primera calificación del alumno: "))
-            if c>=0 and c<=100:
-                c1=c
-                condicion1=True
-                print("\nCalificación agregada con éxito :)\n")
+            c=str(input("Ingrese la primera calificación del alumno: "))
+            if c.strip()=="":
+                print("La primera calificación no debe de estar vacía. Intentelo de nuevo.")
             else:
-                print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
+                c=int(c)
+                if c>=0 and c<=100:
+                    c1=c
+                    condicion1=True
+                    print("\nCalificación agregada con éxito :)\n")
+                else:
+                    print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
 
         condicion2=False
         while condicion2==False:
-            c=int(input("Ingrese la segunda calificación del alumno: "))
-            if c>=0 and c<=100:
-                c2=c
-                condicion2=True
-                print("\nCalificación agregada con éxito :)\n")
+            c=str(input("Ingrese la segunda calificación del alumno: "))
+            if c.strip()=="":
+                print("La segunda calificación no debe de quedar vacía. Intentelo de nuevo.")
             else:
-                print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
+                c=int(c)
+                if c>=0 and c<=100:
+                    c2=c
+                    condicion2=True
+                    print("\nCalificación agregada con éxito :)\n")
+                else:
+                    print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
 
         condicion3=False
         while condicion3==False:
-            c=int(input("Ingrese la tercera calificación del alumno: "))
-            if c>=0 and c<=100:
-                c3=c
-                condicion3=True
-                print("\nCalificación agregada con éxito :)\n")
+            c=str(input("Ingrese la tercera calificación del alumno: "))
+            if c.strip()=="":
+                print("La tercera calificación no debe de quedar vacía. Intentelo de nuevo.")
             else:
-                print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
-
-        calificaciones=(c1,c2,c3)
+                c=int(c)
+                if c>=0 and c<=100:
+                    c3=c
+                    condicion3=True
+                    print("\nCalificación agregada con éxito :)\n")
+                else:
+                    print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
+        calificaciones=(c1,c2,c3)            
+        estudiantes[numid]=nombre
         conta,contr,riesgorep,acumprom=registrar(estudiantes,calificaciones,conta,contr,riesgorep,acumprom)
     elif opcion==2:
         mostrar()
