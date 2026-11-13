@@ -1,6 +1,0 @@
-Estudiantes registrados: 1
-Promedio general: 100.0
-Aprobados: 1
-En riesgo de reprobación: 0
-Reprobados: 0
-Promedio mas alto: 100.0

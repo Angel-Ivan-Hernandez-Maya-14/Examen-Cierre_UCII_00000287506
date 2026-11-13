@@ -5,6 +5,28 @@ acumprom=0
 promedios=[]
 estudiantes={}
 
+try:
+    with open ("estudiantes.txt","r") as archivo:
+        numid1=0
+        for linea in archivo:
+            if "Número de identificación del estudiante" in linea:
+                numid1=int(linea.split(": ")[1].strip())
+            elif "Nombre del estudiante" in linea:
+                estudiantes[numid1]=linea.split(": ")[1].strip()
+            elif "Promedio" in linea:
+                prom=float(linea.split(": ")[1].strip())
+                promedios.append(prom)
+                acumprom+=prom
+            elif "Situación: Aprobado" in linea:
+                conta+=1
+            elif "Situación: Riesgo" in linea:
+                conta+=1
+                riesgorep+=1
+            elif "Situación: Reprobado" in linea:
+                contr+=1
+except FileNotFoundError:
+    pass
+
 def menu():
     print("\n================MENU DE OPCIONES===============\n")
     print("1. Registrar un estudiante")
@@ -33,7 +55,7 @@ def registrar(est,califs,conta,contr,riesgorep,acumprom):
     return conta,contr,riesgorep,acumprom
 
 def mostrar():
-    print("\n========LISTA DE ESTUDIANTES REGISTRADOS========\n")
+    print("\n========LISTA DE ESTUDIANTES REGISTRADOS========")
     with open("estudiantes.txt","r") as archivo:
         for linea in archivo:
             print(linea.strip())
