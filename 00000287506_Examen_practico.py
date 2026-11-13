@@ -1,5 +1,6 @@
 conta=0
 contr=0
+riesgorep=0
 acumprom=0
 promedios=[]
 estudiantes={}
@@ -12,23 +13,25 @@ def menu():
     print("4. Mostrar estadísticas generales del grupo")
     print("5. Salir del programa")
 
-def registrar(est,califs,conta,contr,acumprom):
+def registrar(est,califs,conta,contr,riesgorep,acumprom):
     prom=sum(califs)/3
     if prom>=80 and prom<=100:
         sit="Aprobado"
-        conta=conta+1
+        conta+=1
     elif prom>=70 and prom <80:
         sit="Riesgo de reprobación. Pero estas aprobado"
-        conta=conta+1
+        conta+=1
+        riesgorep+=1
     else:
         sit="Reprobado"
-        contr=contr+1
+        contr+=1
     promedios.append(prom)
     acumprom+=prom
 
     with open("estudiantes.txt","a") as archivo: 
         archivo.write(f"Número de identificación del alumno: {list(est.keys())[-1]}\nNombre del alumno: {list(est.values())[-1]}\nPrimera calificación: {califs[0]}\nSegunda calificación: {califs[1]}\nTercera calificación: {califs[2]}\nPromedio: {prom}\nSituación: {sit}")
-    return conta,contr,acumprom
+    return conta,contr,riesgorep,acumprom
+
 def mostrar():
     with open("estudiantes.txt","r") as archivo:
         for linea in archivo:
@@ -45,7 +48,7 @@ def estadisticas(dictestu):
         promg=0
     alto=max(promedios)
     with open("estadisticas.txt","w") as archivo:
-        archivo.write(f"Estudiantes registrados: {esreg}\nPromedio general: {promg}\nAprobados: {conta}\nReprobados: {contr}\nPromedio mas alto: {alto}")
+        archivo.write(f"Estudiantes registrados: {esreg}\nPromedio general: {promg}\nAprobados: {conta}\nEn riesgo de reprobación: {riesgorep}\nReprobados: {contr}\nPromedio mas alto: {alto}")
 
     with open("estadisticas.txt","r") as archivo:
         for linea in archivo:
@@ -95,7 +98,7 @@ while True:
                 print("\nCalificación fuera de rango (debe ser de 0 a 100). Intentelo de nuevo.\n")
 
         calificaciones=(c1,c2,c3)
-        conta,contr,acumprom=registrar(estudiantes,calificaciones,conta,contr,acumprom)
+        conta,contr,riesgorep,acumprom=registrar(estudiantes,calificaciones,conta,contr,riesgorep,acumprom)
     elif opcion==2:
         mostrar()
     elif opcion==3:
